@@ -25,25 +25,23 @@ public class ExamController {
 	private ExamService examService;
 
 	@PostMapping
-	@ResponseStatus(code = HttpStatus.CREATED)
-	public ExamEntity addExam(@RequestBody ExamEntity examEntity) {
-		 
-		examService.addExam(examEntity);
-		return examEntity;
-
-	}
+	public ResponseEntity<ExamEntity> addExam(@RequestBody ExamEntity examEntity) {
+		ExamEntity examEntityObj = examService.addExam(examEntity);
+		return new ResponseEntity<>(examEntityObj, HttpStatus.CREATED);
+	} 
 
 	@GetMapping
-	public List<ExamEntity> getexamData() {
-		List<ExamEntity> examEntity = examService.getexamData();
-		return examEntity;
+	public ResponseEntity<List<ExamEntity>> getExamData1() {
+		List<ExamEntity> examEntities = examService.getexamData();
+		return new ResponseEntity<>(examEntities, HttpStatus.OK);
 	}
 
 	@GetMapping("{id}")
-	public ExamEntity getExamByID(@PathVariable Long id) {
+	public ResponseEntity<ExamEntity> getExamByID(@PathVariable Long id) {
 		ExamEntity examEntity = examService.findById(id).get();
-		return examEntity;
+		return new ResponseEntity<>(examEntity, HttpStatus.OK);
 	}
+
 
 	@PutMapping("/{id}")
 	public ResponseEntity<ExamEntity> updateExamById(@PathVariable Long id, @RequestBody ExamEntity examEntity) {
@@ -56,6 +54,7 @@ public class ExamController {
 		}
 
 	}
+
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ExamEntity> deleteExamById(@PathVariable Long id) {
