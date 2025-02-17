@@ -36,7 +36,6 @@ public class ExamService {
 		} else {
 			return null;
 		}
-
 	}
 
 	public void deleteExamById(Long id) {
