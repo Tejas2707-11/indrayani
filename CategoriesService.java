@@ -37,7 +37,6 @@ public class CategoriesService {
 
 		boolean isExist = categoriesRepository.existsById(id);
 		if (isExist) {
-			categoriesEntity
 			return categoriesRepository.save(categoriesEntity);
 		} else {
 			return null;
