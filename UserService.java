@@ -32,7 +32,7 @@ public class UserService {
 
 		boolean isExist = userRepository.existsById(id);
 		if (isExist) {
-			userEntity.setid(id);
+			userEntity.setId(id);
 			return userRepository.save(userEntity);
 		} else {
 			return null;
