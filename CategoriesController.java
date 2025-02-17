@@ -25,22 +25,21 @@ public class CategoriesController {
 	private CategoriesService categoriesService;
 
 	@PostMapping
-	@ResponseStatus(code = HttpStatus.CREATED)
-	public CategoriesEntity addCategories(@RequestBody CategoriesEntity categoriesEntity) {
-		categoriesService.addCategories(categoriesEntity);
-		return categoriesEntity;
+	public ResponseEntity<CategoriesEntity> addCategories(@RequestBody CategoriesEntity categoriesEntity) {
+		CategoriesEntity categoriesEntityObj = categoriesService.addCategories(categoriesEntity);
+		return new ResponseEntity<>(categoriesEntityObj, HttpStatus.CREATED);
 	}
 
 	@GetMapping
-	public List<CategoriesEntity> getCategoriesData() {
-		List<CategoriesEntity> categoriesEntity = categoriesService.getCategoriesData();
-		return categoriesEntity;
+	public ResponseEntity<List<CategoriesEntity>> getCategoriesData() {
+		List<CategoriesEntity> categoriesEntities = categoriesService.getCategoriesData();
+		return new ResponseEntity<>(categoriesEntities, HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}")
-	public CategoriesEntity getCategoriesByID(@PathVariable Long id) {
+	public ResponseEntity<CategoriesEntity> getCategoriesByID(@PathVariable Long id) {
 		CategoriesEntity categoriesEntity = categoriesService.findByID(id).get();
-		return categoriesEntity;
+		return new ResponseEntity<>(categoriesEntity, HttpStatus.OK);
 	}
 
 	@PutMapping("/{id}")
